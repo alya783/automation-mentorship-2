@@ -1,0 +1,26 @@
+{
+    "name": "webdriverio-tests",
+    "version": "0.1.0",
+    "private": true,
+    "devDependencies": {
+        "@wdio/allure-reporter": "^7.20.7",
+        "@wdio/cli": "^7.20.9",
+        "@wdio/cucumber-framework": "^7.20.8",
+        "@wdio/local-runner": "^7.20.9",
+        "@wdio/spec-reporter": "^7.20.8",
+        "chromedriver": "^103.0.0",
+        "wdio-chromedriver-service": "^7.3.2"
+    },
+    "scripts": {
+        "wdio": "wdio run wdio.conf.js",
+        "report": "cp  -R ./allure-report/history ./allure-results/; allure generate -c && allure open",
+        "report:generate": "sleep 1;  cp  -R ./allure-report/history ./allure-results/; allure generate -c",
+        "report:purge": "rm -rf allure-results; rm -rf allure-report",
+        "clean": "rm -rf allure-results/*",
+        "table": "npx wdio -f cucumber --spec features/table.feature",
+        "actions": "npx wdio -f cucumber --spec features/actions.feature"
+    },
+    "dependencies": {
+        "allure-commandline": "^2.18.1"
+    }
+}
