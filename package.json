@@ -18,7 +18,8 @@
         "report:purge": "rm -rf allure-results; rm -rf allure-report",
         "clean": "rm -rf allure-results/*",
         "table": "npx wdio -f cucumber --spec features/table.feature",
-        "actions": "npx wdio -f cucumber --spec features/actions.feature"
+        "actions": "npx wdio -f cucumber --spec features/actions.feature",
+        "custom-type": "npx wdio -f cucumber --spec features/customType.feature"
     },
     "dependencies": {
         "allure-commandline": "^2.18.1"

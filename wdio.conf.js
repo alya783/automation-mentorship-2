@@ -146,9 +146,9 @@ exports.config = {
     // If you are using Cucumber you need to specify the location of your step definitions.
     cucumberOpts: {
         // <string[]> (file/dir) require files before executing features
-        require: ['./features/step-definitions/*.js', ],
+        require: ['./features/step-definitions/*.js', './features/support/linkType.js', ],
         // <boolean> show full backtrace for errors
-        backtrace: false,
+        backtrace: true,
         // <string[]> ("extension:module") require files with the given EXTENSION after requiring MODULE (repeatable)
         requireModule: [],
         // <boolean> invoke formatters without executing steps

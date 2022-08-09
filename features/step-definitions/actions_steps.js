@@ -67,5 +67,3 @@ When ('drag and drop item', async function (){
 
 
 
-
-
