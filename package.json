@@ -19,7 +19,8 @@
         "clean": "rm -rf allure-results/*",
         "table": "npx wdio -f cucumber --spec features/table.feature",
         "actions": "npx wdio -f cucumber --spec features/actions.feature",
-        "custom-type": "npx wdio -f cucumber --spec features/customType.feature"
+        "custom-type": "npx wdio -f cucumber --spec features/customType.feature",
+        "test-tables": "npx wdio -f cucumber --spec features/testTables.feature"
     },
     "dependencies": {
         "allure-commandline": "^2.18.1"
