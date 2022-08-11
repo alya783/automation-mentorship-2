@@ -22,7 +22,11 @@
         "custom-type": "npx wdio -f cucumber --spec features/customType.feature",
         "test-tables": "npx wdio -f cucumber --spec features/testTables.feature",
         "img-upload": "npx wdio -f cucumber --spec features/fileUploading.feature",
-        "file-upload": "npx wdio -f cucumber --spec features/fileUploading2.feature"
+        "file-upload": "npx wdio -f cucumber --spec features/fileUploading2.feature",
+        "upload-test":"npx wdio wdio.conf.js --cucumberOpts.tagExpression='@upload and @picture'",
+        "custom-types": "npx wdio wdio.conf.js --cucumberOpts.tagExpression='@type'", 
+        "tables": "npx wdio wdio.conf.js --cucumberOpts.tagExpression='@table and not @inProgress'",
+        "actions-tag": "npx wdio wdio.conf.js --cucumberOpts.tagExpression='@actions and not @inProgress'"
     },
     "dependencies": {
         "allure-commandline": "^2.18.1"

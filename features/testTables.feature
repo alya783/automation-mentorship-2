@@ -1,8 +1,10 @@
+@table
 Feature: Footer collection links
 
   Background:
     Given I go to the main page
 
+  @inProgress
   Scenario: table without header
     When I click on dropdown menu  
     Then I see the items:
@@ -12,7 +14,8 @@ Feature: Footer collection links
       | About   |
       | Terms   |
       | Privacy | 
-
+  
+  @header
   Scenario: table with header  
     Then I check items:
       | link                         | title                                     |

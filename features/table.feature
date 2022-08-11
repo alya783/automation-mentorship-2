@@ -1,3 +1,4 @@
+@table
 Feature: Trendind links
 
   Scenario Outline: Check text and link for trendind link
