@@ -9,7 +9,7 @@
             "type": "node",
             "request": "launch",
             "args": [
-                "wdio.conf.js", "--spec", "actions"
+                "wdio.conf.js", "--spec", "fileUploading"
             ],
             "cwd": "${workspaceFolder}",
             "autoAttachChildProcesses": true,

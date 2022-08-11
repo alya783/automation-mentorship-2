@@ -20,7 +20,9 @@
         "table": "npx wdio -f cucumber --spec features/table.feature",
         "actions": "npx wdio -f cucumber --spec features/actions.feature",
         "custom-type": "npx wdio -f cucumber --spec features/customType.feature",
-        "test-tables": "npx wdio -f cucumber --spec features/testTables.feature"
+        "test-tables": "npx wdio -f cucumber --spec features/testTables.feature",
+        "img-upload": "npx wdio -f cucumber --spec features/fileUploading.feature",
+        "file-upload": "npx wdio -f cucumber --spec features/fileUploading2.feature"
     },
     "dependencies": {
         "allure-commandline": "^2.18.1"
