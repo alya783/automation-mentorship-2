@@ -1,8 +1,12 @@
+require('dotenv').config();
 const { Given, When, Then } = require('@wdio/cucumber-framework');
 
 const MainPage = require('../pageobjects/mainPO');
 const EditPage = require('../pageobjects/editPagePO');
+const Upload = require('../pageobjects/internetPO');
 const path = require('path');
+const login = process.env.LOGIN; // ??? export LOGIN="astrashevichute@gmail.com" do in terminal
+const password = process.env.PASSWORD; // ??? export PASSWORD="2022PolandAQA" do in terminal
 
 Given ('I open main page', async () => {
     await browser.deleteAllCookies();
@@ -10,14 +14,14 @@ Given ('I open main page', async () => {
 });
 
 When ('I login in my account', async () => {
-    await MainPage.login("astrashevichute@gmail.com", "2022PolandAQA");
+    await MainPage.login(`${login}`,`${password}`);
 });
 
 Then ('I upload the image', async () => {
     const filePath = '/home/alya/Desktop/alya.jpg';
     const remoteFilePath = await browser.uploadFile(filePath);
     await EditPage.uploadBtn.addValue(remoteFilePath);
-    await expect(await $('.fa.fa-user-circle.blank-pic')).toHaveAttribute('style', 'display:none;');
+    await expect(await EditPage.avatar).toHaveAttribute('style', 'display:none;');
 });
 
 When('I save profile changes', async () => {
@@ -32,10 +36,10 @@ Given('I open the page {link}', async (link) => {
 Then ('I upload the file', async () => {
     const internalPath = '/home/alya/Desktop/mountain.jpg';
     const remoteFilePath = await browser.uploadFile(internalPath);
-    await $('#file-upload').setValue(remoteFilePath);
-    await $('#file-submit').click();
+    await Upload.uploadButton.setValue(remoteFilePath);
+    await Upload.submitButton.click();
 });
 
 When('I check the file was uploaded', async () => {
-    await $('#uploaded-files').waitForDisplayed({ timeout: 3000 });
-})
+    await Upload.message.waitForDisplayed({ timeout: 3000 });
+});

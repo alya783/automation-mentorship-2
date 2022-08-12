@@ -31,6 +31,10 @@ class EditPage {
     get alertSuccess(){
         return $('//div[text()="Your personal info has been updated."]');
     }
+
+    get avatar(){
+        return $('.fa.fa-user-circle.blank-pic');
+    }
     
     async exitPage () {
         await this.dropdownIcon.click();
