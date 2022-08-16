@@ -18,7 +18,7 @@ When ('I login in my account', async () => {
 });
 
 Then ('I upload the image', async () => {
-    const filePath = '/home/alya/Desktop/alya.jpg';
+    const filePath = './content/alya.jpg';
     const remoteFilePath = await browser.uploadFile(filePath);
     await EditPage.uploadBtn.addValue(remoteFilePath);
     await expect(await EditPage.avatar).toHaveAttribute('style', 'display:none;');
@@ -34,7 +34,7 @@ Given('I open the page {link}', async (link) => {
 });
 
 Then ('I upload the file', async () => {
-    const internalPath = '/home/alya/Desktop/mountain.jpg';
+    const internalPath = './content/mountain.jpg';
     const remoteFilePath = await browser.uploadFile(internalPath);
     await Upload.uploadButton.setValue(remoteFilePath);
     await Upload.submitButton.click();
