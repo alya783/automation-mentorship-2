@@ -9,7 +9,8 @@
         "@wdio/local-runner": "^7.20.9",
         "@wdio/spec-reporter": "^7.20.8",
         "chromedriver": "^103.0.0",
-        "wdio-chromedriver-service": "^7.3.2"
+        "wdio-chromedriver-service": "^7.3.2",
+        "wdio-cucumberjs-json-reporter": "^4.4.3"
     },
     "scripts": {
         "wdio": "wdio run wdio.conf.js",
@@ -26,7 +27,8 @@
         "upload-test": "npx wdio wdio.conf.js --cucumberOpts.tagExpression='@upload and @picture'",
         "custom-types": "npx wdio wdio.conf.js --cucumberOpts.tagExpression='@type'",
         "tables": "npx wdio wdio.conf.js --cucumberOpts.tagExpression='@table and not @inProgress'",
-        "actions-tag": "npx wdio wdio.conf.js --cucumberOpts.tagExpression='@actions and not @inProgress'"
+        "actions-tag": "npx wdio wdio.conf.js --cucumberOpts.tagExpression='@actions and not @inProgress'",
+        "download": "npx wdio -f cucumber --spec features/fileDownload.feature"
     },
     "dependencies": {
         "allure-commandline": "^2.18.1",

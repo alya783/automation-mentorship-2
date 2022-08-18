@@ -1,3 +1,10 @@
+const path = require('path');
+const fs = require('fs');
+const rmdir = require('./features/support/delete_dir');
+
+// Store the directory path in a global, which allows us to access this path inside our tests
+global.downloadDir = path.join(__dirname, 'fileDownload');
+
 exports.config = {
     //
     // ====================
@@ -50,18 +57,18 @@ exports.config = {
     // https://saucelabs.com/platform/platform-configurator
     //
     capabilities: [{
-    
         // maxInstances can get overwritten per capability. So if you have an in-house Selenium
         // grid with only 5 firefox instances available you can make sure that not more than
         // 5 instances get started at a time.
         maxInstances: 5,
         //
         browserName: 'chrome',
-        acceptInsecureCerts: true
-        // If outputDir is provided WebdriverIO can capture driver session logs
-        // it is possible to configure which logTypes to include/exclude.
-        // excludeDriverLogs: ['*'], // pass '*' to exclude all driver session logs
-        // excludeDriverLogs: ['bugreport', 'server'],
+        // this overrides the default chrome download directory with our temporary one
+        'goog:chromeOptions': {
+          prefs: {
+            'download.default_directory': downloadDir
+          }
+        }
     }],
     //
     // ===================
@@ -138,7 +145,11 @@ exports.config = {
             disableWebdriverStepsReporting: true,
             // disableWebdriverScreenshotsReporting: true,
             useCucumberStepReporter: false,
-        }]
+        }], 
+        [ 'cucumberjs-json', {
+            jsonFolder: '.tmp/new/',
+            language: 'en',
+        }],
     ],
 
 
@@ -182,8 +193,11 @@ exports.config = {
      * @param {Object} config wdio configuration object
      * @param {Array.<Object>} capabilities list of capabilities details
      */
-    // onPrepare: function (config, capabilities) {
-    // },
+     onPrepare: function (config, capabilities) {
+        if (!fs.existsSync(downloadDir)){
+            fs.mkdirSync(downloadDir);
+        }
+     },
     /**
      * Gets executed before a worker process is spawned and can be used to initialise specific service
      * for that worker as well as modify runtime environments in an async fashion.
@@ -272,7 +286,7 @@ exports.config = {
         if (error) {
           await browser.takeScreenshot();
         }
-    }
+    },
     /**
      *
      * Runs after a Cucumber Scenario.
@@ -328,8 +342,9 @@ exports.config = {
      * @param {Array.<Object>} capabilities list of capabilities details
      * @param {<Object>} results object containing test results
      */
-    // onComplete: function(exitCode, config, capabilities, results) {
-    // },
+    onComplete: function(exitCode, config, capabilities, results) {
+        rmdir(downloadDir);
+    },
     /**
     * Gets executed when a refresh happens.
     * @param {String} oldSessionId session ID of the old session

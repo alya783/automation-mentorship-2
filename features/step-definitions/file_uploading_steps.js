@@ -1,19 +1,24 @@
 require('dotenv').config();
 const { Given, When, Then } = require('@wdio/cucumber-framework');
-
+const { CucumberJsJsonReporter } = require('wdio-cucumberjs-json-reporter');
 const MainPage = require('../pageobjects/mainPO');
 const EditPage = require('../pageobjects/editPagePO');
 const Upload = require('../pageobjects/internetPO');
 const path = require('path');
-const login = process.env.LOGIN; // ??? export LOGIN="astrashevichute@gmail.com" do in terminal
-const password = process.env.PASSWORD; // ??? export PASSWORD="2022PolandAQA" do in terminal
+const login = process.env.LOGIN; 
+const password = process.env.PASSWORD; 
+
+browser.addCommand("saveChanges", async function (s1, s2) {
+    await s1.click();
+    await s2.waitForDisplayed({ timeout: 3000 });
+});
 
 Given ('I open main page', async () => {
     await browser.deleteAllCookies();
     await MainPage.open();
 });
 
-When ('I login in my account', async () => {
+When ('I login in my account', { wrapperOptions: { retry: 2 } }, async () => {
     await MainPage.login(`${login}`,`${password}`);
 });
 
@@ -25,8 +30,8 @@ Then ('I upload the image', async () => {
 });
 
 When('I save profile changes', async () => {
-    await EditPage.saveBtn.click();
-    await EditPage.alertSuccess.waitForDisplayed({ timeout: 3000 });
+    await browser.saveChanges(EditPage.saveBtn, EditPage.alertSuccess);
+    CucumberJsJsonReporter.attach("done!", 'text/plain'); // ?????
 });
 
 Given('I open the page {link}', async (link) => {
