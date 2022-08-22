@@ -1,6 +1,8 @@
 const path = require('path');
 const fs = require('fs');
 const rmdir = require('./features/support/delete_dir');
+const { generate } = require('multiple-cucumber-html-reporter');
+const { removeSync } = require('fs-extra');
 
 // Store the directory path in a global, which allows us to access this path inside our tests
 global.downloadDir = path.join(__dirname, 'fileDownload');
@@ -197,6 +199,8 @@ exports.config = {
         if (!fs.existsSync(downloadDir)){
             fs.mkdirSync(downloadDir);
         }
+
+        removeSync('.tmp/');
      },
     /**
      * Gets executed before a worker process is spawned and can be used to initialise specific service
@@ -344,6 +348,11 @@ exports.config = {
      */
     onComplete: function(exitCode, config, capabilities, results) {
         rmdir(downloadDir);
+        generate({
+            jsonDir: '.tmp/new/',
+            reportPath: '.tmp/report/',
+            // for more options see https://github.com/wswebcreation/multiple-cucumber-html-reporter#options
+          });
     },
     /**
     * Gets executed when a refresh happens.

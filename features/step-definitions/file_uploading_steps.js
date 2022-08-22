@@ -31,7 +31,8 @@ Then ('I upload the image', async () => {
 
 When('I save profile changes', async () => {
     await browser.saveChanges(EditPage.saveBtn, EditPage.alertSuccess);
-    CucumberJsJsonReporter.attach("done!", 'text/plain'); // ?????
+    CucumberJsJsonReporter.attach("done!", 'text/plain');
+    CucumberJsJsonReporter.attach(await browser.takeScreenshot(), 'image/png'); 
 });
 
 Given('I open the page {link}', async (link) => {
