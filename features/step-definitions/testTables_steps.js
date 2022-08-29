@@ -17,7 +17,7 @@ Then ('I see the items:', async function(table){
     addStep('links', Buffer(await browser.takeScreenshot()));
     for(let i = 0; i < linksText.length; i++){
         const elem = await MainPage.dropdownMenuItems[i];
-        await expect(elem).toHaveText(linksText[i][0]);
+        await expect(elem).toHaveText(linksText[i][0], { message: 'Wrong text', });
     }
 }); 
 
