@@ -69,7 +69,8 @@ exports.config = {
         'goog:chromeOptions': {
           prefs: {
             'download.default_directory': downloadDir
-          }
+          },
+          args:['--headless', '--no-sandbox']
         }
     }],
     //
