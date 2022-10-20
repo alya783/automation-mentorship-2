@@ -70,7 +70,7 @@ exports.config = {
           prefs: {
             'download.default_directory': downloadDir
           },
-          args:['--headless', '--no-sandbox']
+          args:['--headless','--disable-dev-shm-usage','--no-sandbox']
         }
     }],
     //
